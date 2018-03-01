@@ -28,7 +28,7 @@ class priceListTest {
         price pricePhone = new price(1400, 50);
         priceList priceList = new priceList(new HashMap<>());
         priceList.add(phone, pricePhone);
-        priceList.fixPrice("phone", new price(1000, 50));
+        priceList.fixPrice(2018, new price(1000, 50));
         assertEquals(1000.5, priceList.list.get(phone).priceProduct());
     }
 
@@ -38,7 +38,7 @@ class priceListTest {
         price pricePr = new price(1400, 50);
         priceList priceList = new priceList(new HashMap<>());
         priceList.add(pr, pricePr);
-        priceList.fixName("phone", "car");
+        priceList.fixName(2018, "car");
         assertEquals("car", pr.getName());
     }
 
@@ -63,7 +63,7 @@ class priceListTest {
         assertEquals(0, priceList.list.size());
         priceList.add(phone, pricePhone);
         priceList.add(car, priceCar);
-        assertEquals(8000240.0, priceList.findPrice(400, 2017).priceProduct(),0.01);
+        assertEquals(8000240.0, priceList.findPrice(400, 2017).priceProduct(), 0.01);
         assertEquals(9999.5, priceList.findPrice(5, 2018).priceProduct());
     }
 
