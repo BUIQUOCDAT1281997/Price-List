@@ -3,68 +3,65 @@ package part1;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class priceListTest {
+class PriceListTest {
 
     @Test
     void add() {
-        products phone = new products("phone", 2018);
-        products car = new products("car", 2017);
-        price pricePhone = new price(1400, 50);
-        price priceCar = new price(20000, 60);
-        priceList priceList = new priceList(new HashMap<>());
-        assertEquals(0, priceList.list.size());
-        priceList.add(phone, pricePhone);
-        priceList.add(car, priceCar);
-        assertEquals(2, priceList.list.size());
+        PriceList pl = new PriceList(new HashMap<>());
+        assertEquals(0, pl.getSize());
+        pl.add(1, new PriceListItem("phone", 1, 2000, 50));
+        pl.add(2, new PriceListItem("car", 2, 300000, 60));
+        pl.add(3, new PriceListItem("computer", 3, 4000, 80));
+        pl.add(4, new PriceListItem("television", 4, 6000, 40));
+        assertEquals(4, pl.getSize());
     }
 
     @Test
     void fixPrice() {
-        products phone = new products("phone", 2018);
-        price pricePhone = new price(1400, 50);
-        priceList priceList = new priceList(new HashMap<>());
-        priceList.add(phone, pricePhone);
-        priceList.fixPrice(2018, new price(1000, 50));
-        assertEquals(1000.5, priceList.list.get(phone).priceProduct());
+        PriceList pl = new PriceList(new HashMap<>());
+        pl.add(1, new PriceListItem("phone", 1, 2000, 50));
+        pl.add(2, new PriceListItem("car", 2, 300000, 60));
+        pl.add(3, new PriceListItem("computer", 3, 4000, 80));
+        pl.add(4, new PriceListItem("television", 4, 6000, 40));
+        pl.fixPrice(1, 5000.5);
+        assertEquals(5000.5, pl.getProduct(1).getPrice());
     }
 
     @Test
     void fixName() {
-        products pr = new products("phone", 2018);
-        price pricePr = new price(1400, 50);
-        priceList priceList = new priceList(new HashMap<>());
-        priceList.add(pr, pricePr);
-        priceList.fixName(2018, "car");
-        assertEquals("car", pr.getName());
+        PriceList pl = new PriceList(new HashMap<>());
+        pl.add(1, new PriceListItem("phone", 1, 2000, 50));
+        pl.add(2, new PriceListItem("car", 2, 300000, 60));
+        pl.add(3, new PriceListItem("computer", 3, 4000, 80));
+        pl.add(4, new PriceListItem("television", 4, 6000, 40));
+        pl.fixName(2, "water");
+        assertEquals("water", pl.getProduct(2).getName());
     }
 
     @Test
     void delete() {
-        products phone = new products("phone", 2018);
-        price pricePhone = new price(1400, 50);
-        priceList priceList = new priceList(new HashMap<>());
-        priceList.add(phone, pricePhone);
-        priceList.delete(2018);
-        assertTrue(priceList.list.isEmpty());
-        assertEquals(null, priceList.list.get(phone));
+        PriceList pl = new PriceList(new HashMap<>());
+        pl.add(1, new PriceListItem("phone", 1, 2000, 50));
+        pl.add(2, new PriceListItem("car", 2, 300000, 60));
+        pl.add(3, new PriceListItem("computer", 3, 4000, 80));
+        pl.add(4, new PriceListItem("television", 4, 6000, 40));
+        pl.delete(1);
+        pl.delete(2);
+        assertEquals(null, pl.getProduct(1));
+        assertEquals(2, pl.getSize());
     }
 
     @Test
     void findPrice() {
-        products phone = new products("phone", 2018);
-        products car = new products("car", 2017);
-        price pricePhone = new price(1999, 90);
-        price priceCar = new price(20000, 60);
-        priceList priceList = new priceList(new HashMap<>());
-        assertEquals(0, priceList.list.size());
-        priceList.add(phone, pricePhone);
-        priceList.add(car, priceCar);
-        assertEquals(8000240.0, priceList.findPrice(400, 2017).priceProduct(), 0.01);
-        assertEquals(9999.5, priceList.findPrice(5, 2018).priceProduct());
+        PriceList pl = new PriceList(new HashMap<>());
+        pl.add(1, new PriceListItem("phone", 1, 2000, 50));
+        pl.add(2, new PriceListItem("car", 2, 300000, 60));
+        pl.add(3, new PriceListItem("computer", 3, 4000, 80));
+        pl.add(4, new PriceListItem("television", 4, 6000, 40));
+        assertEquals(24001.6, pl.findPrice(4, 4));
     }
 
 }
