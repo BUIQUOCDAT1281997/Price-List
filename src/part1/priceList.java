@@ -1,18 +1,19 @@
 package part1;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PriceList {
 
-    private Map<Integer, PriceListItem> list = new HashMap<>();
+    private Map<Integer, PriceListItem> list;
 
     public Map<Integer, PriceListItem> getList() {
-        return list;
+        return Collections.unmodifiableMap(list);
     }
 
-    public PriceList(Map<Integer, PriceListItem> other) {
-        this.list = other;
+    public PriceList() {
+        this.list = new HashMap<>();
     }
 
     //добавление товара.
@@ -69,8 +70,8 @@ public class PriceList {
 
     //поиска товара , цена которого самая дешевая
     public PriceListItem minPice() {
-        double min = 0.0;
-        PriceListItem result = null;
+        PriceListItem result = this.maxPice();
+        double min = result.getPrice();
         for (PriceListItem element : list.values()) {
             if (element.getPrice() < min) {
                 min = element.getPrice();
@@ -84,29 +85,23 @@ public class PriceList {
     public String toString() {
         String result = "list of products: ";
         for (PriceListItem element : list.values()) {
-            result += (element.getName() + "( code: " + element.getCode() + " Price: " + element.getPrice() + ");");
+            result += (element.getName() + "( code: " + element.getCode() + " Price: " + element.getPrice() + "); ");
         }
         if (list.isEmpty()) return "There are no products in the list.";
         return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        else if (obj instanceof PriceList) {
-            PriceList other = (PriceList) obj;
-            return other.list == list;
-        }
-        return false;
-    }
-
-    @Override
     public int hashCode() {
-        return list.size() * 31;
+        int result = list.size();
+        for (PriceListItem element : list.values()) {
+            result += element.hashCode() * 31;
+        }
+        return result;
     }
 
     public static void main(String[] args) {
-        PriceList pl = new PriceList(new HashMap<>());
+        PriceList pl = new PriceList();
         pl.add(1, new PriceListItem("a", 1, 300, 20));
         pl.add(2, new PriceListItem("b", 2, 400, 50));
         System.out.println(pl.toString());

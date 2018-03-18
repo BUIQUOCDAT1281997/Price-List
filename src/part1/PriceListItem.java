@@ -33,4 +33,23 @@ public class PriceListItem {
         return (double) rub + (double) copek / 100;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        else if (obj instanceof PriceListItem) {
+            PriceListItem other = (PriceListItem) obj;
+            return name == other.name && code == other.code && getPrice() == other.getPrice();
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return code * (rub + copek / 100) * 31;
+    }
+
+    @Override
+    public String toString() {
+        return "name: " + name + ", code: " + code + ", price: " + this.getPrice();
+    }
 }
