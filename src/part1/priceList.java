@@ -90,7 +90,16 @@ public class PriceList {
         if (list.isEmpty()) return "There are no products in the list.";
         return result;
     }
-
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        else if (obj instanceof PriceList) {
+            PriceList other = (PriceList) obj;
+            return list.equals(other.list);
+        }
+        return false;
+}
     @Override
     public int hashCode() {
         int result = list.size();
