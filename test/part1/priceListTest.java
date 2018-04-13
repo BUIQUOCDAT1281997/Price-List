@@ -2,7 +2,6 @@ package part1;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,9 +18,7 @@ class PriceListTest {
         pl.add(4, new PriceListItem("television", 4, 6000, 40));
         assertEquals(4, pl.getSize());
         assertEquals(
-                "list of products: phone( code: 1 Price: 2000.5); " +
-                        "car( code: 2 Price: 300000.6); computer( code: 3 Price: 4000.8); " +
-                        "television( code: 4 Price: 6000.4); ", pl.toString());
+                "phone(1,2000.5); car(2,300000.6); computer(3,4000.8); television(4,6000.4); ", pl.toString());
     }
 
     @Test
@@ -57,7 +54,7 @@ class PriceListTest {
         pl.delete(2);
         assertEquals(null, pl.getProduct(1));
         assertEquals(2, pl.getSize());
-        assertEquals("list of products: computer( code: 3 Price: 4000.8); television( code: 4 Price: 6000.4); "
+        assertEquals("computer(3,4000.8); television(4,6000.4); "
                 , pl.toString());
     }
 
@@ -93,7 +90,7 @@ class PriceListTest {
         pl.add(2, new PriceListItem("car", 2, 300000, 60));
         pl.add(3, new PriceListItem("computer", 3, 4000, 80));
         pl.add(4, new PriceListItem("television", 4, 6000, 40));
-        assertEquals("name: car, code: 2, price: 300000.6", pl.getProduct(2).toString());
+        assertEquals("car(2,300000.6)", pl.getProduct(2).toString());
     }
 
     @Test
@@ -103,7 +100,7 @@ class PriceListTest {
         pl.add(2, new PriceListItem("car", 2, 300000, 60));
         pl.add(3, new PriceListItem("computer", 3, 4000, 80));
         pl.add(4, new PriceListItem("television", 4, 6000, 40));
-        assertEquals("name: car, code: 2, price: 300000.6", pl.maxPice().toString());
+        assertEquals("car(2,300000.6)", pl.maxPice().toString());
     }
 
     @Test
@@ -113,6 +110,6 @@ class PriceListTest {
         pl.add(2, new PriceListItem("car", 2, 300000, 60));
         pl.add(3, new PriceListItem("computer", 3, 4000, 80));
         pl.add(4, new PriceListItem("television", 4, 6000, 40));
-        assertEquals("name: phone, code: 1, price: 2000.5", pl.minPice().toString());
+        assertEquals("phone(1,2000.5)", pl.minPice().toString());
     }
 }
