@@ -50,6 +50,6 @@ public class PriceListItem {
 
     @Override
     public String toString() {
-        return "name: " + name + ", code: " + code + ", price: " + this.getPrice();
+         return name + "(" + code + "," + this.getPrice()+")";
     }
 }
