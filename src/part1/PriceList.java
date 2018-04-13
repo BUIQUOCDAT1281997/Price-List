@@ -83,9 +83,9 @@ public class PriceList {
 
     @Override
     public String toString() {
-        String result = "list of products: ";
+        String result="";
         for (PriceListItem element : list.values()) {
-            result += (element.getName() + "( code: " + element.getCode() + " Price: " + element.getPrice() + "); ");
+            result += (element.getName() +"(" + element.getCode() + "," + element.getPrice() + "); ");
         }
         if (list.isEmpty()) return "There are no products in the list.";
         return result;
