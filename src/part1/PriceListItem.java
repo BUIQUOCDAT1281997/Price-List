@@ -38,7 +38,7 @@ public class PriceListItem {
         if (this == obj) return true;
         else if (obj instanceof PriceListItem) {
             PriceListItem other = (PriceListItem) obj;
-            return name == other.name && code == other.code && getPrice() == other.getPrice();
+            return name.equals(other.name) && code == other.code && getPrice() == other.getPrice();
         }
         return false;
     }
