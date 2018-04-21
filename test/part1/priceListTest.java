@@ -17,8 +17,10 @@ class PriceListTest {
         pl.add(3, new PriceListItem("computer", 3, 4000, 80));
         pl.add(4, new PriceListItem("television", 4, 6000, 40));
         assertEquals(4, pl.getSize());
-        assertEquals(
-                "phone(1,2000.5); car(2,300000.6); computer(3,4000.8); television(4,6000.4); ", pl.toString());
+        assertEquals(new PriceListItem("phone", 1, 2000,50), pl.getProduct(1));
+        assertEquals(new PriceListItem("car", 2, 300000,60), pl.getProduct(2));
+        assertEquals(new PriceListItem("computer", 3, 4000,80), pl.getProduct(3));
+        assertEquals(new PriceListItem("television", 4, 6000,40), pl.getProduct(4));
     }
 
     @Test
@@ -54,8 +56,6 @@ class PriceListTest {
         pl.delete(2);
         assertEquals(null, pl.getProduct(1));
         assertEquals(2, pl.getSize());
-        assertEquals("computer(3,4000.8); television(4,6000.4); "
-                , pl.toString());
     }
 
     @Test
@@ -90,7 +90,10 @@ class PriceListTest {
         pl.add(2, new PriceListItem("car", 2, 300000, 60));
         pl.add(3, new PriceListItem("computer", 3, 4000, 80));
         pl.add(4, new PriceListItem("television", 4, 6000, 40));
-        assertEquals("car(2,300000.6)", pl.getProduct(2).toString());
+        assertEquals(new PriceListItem("phone",1,2000,50),pl.getProduct(1));
+        assertEquals(new PriceListItem("car",2,300000,60), pl.getProduct(2));
+        assertEquals(new PriceListItem("computer",3,4000,80),pl.getProduct(3));
+        assertEquals(new PriceListItem("television",4,6000,40),pl.getProduct(4));
     }
 
     @Test
@@ -100,7 +103,7 @@ class PriceListTest {
         pl.add(2, new PriceListItem("car", 2, 300000, 60));
         pl.add(3, new PriceListItem("computer", 3, 4000, 80));
         pl.add(4, new PriceListItem("television", 4, 6000, 40));
-        assertEquals("car(2,300000.6)", pl.maxPice().toString());
+        assertEquals(new PriceListItem("car",2,300000,60), pl.maxPice());
     }
 
     @Test
@@ -110,6 +113,6 @@ class PriceListTest {
         pl.add(2, new PriceListItem("car", 2, 300000, 60));
         pl.add(3, new PriceListItem("computer", 3, 4000, 80));
         pl.add(4, new PriceListItem("television", 4, 6000, 40));
-        assertEquals("phone(1,2000.5)", pl.minPice().toString());
+        assertEquals(new PriceListItem("phone",1,2000,50), pl.minPice());
     }
 }
